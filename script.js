@@ -59,7 +59,7 @@ const games = [
         title: "Spotify Premium - 3 Meses",
         genre: "Entretenimiento",
         priceOld: 40000,
-        priceNew: 20000, // Precio ajustado a petición
+        priceNew: 20000,
         discount: "-50%",
         image: "spotify_pin.png"
     },
@@ -126,19 +126,19 @@ const renderGames = (gamesToRender) => {
         const card = document.createElement('div');
         card.className = 'game-card';
         
-        card.innerHTML = \`
+        card.innerHTML = `
             <div class="game-image-container">
-                <span class="game-discount">\${game.discount}</span>
-                <img src="\${game.image}" alt="\${game.title}" class="game-image">
+                <span class="game-discount">${game.discount}</span>
+                <img src="${game.image}" alt="${game.title}" class="game-image">
             </div>
             <div class="game-info">
-                <h3 class="game-title">\${game.title}</h3>
-                <p class="game-genre">\${game.genre}</p>
+                <h3 class="game-title">${game.title}</h3>
+                <p class="game-genre">${game.genre}</p>
                 <div class="game-price-row">
-                    <span class="game-price-old">\${formatCurrency(game.priceOld)}</span>
-                    <span class="game-price-new">\${formatCurrency(game.priceNew)}</span>
+                    <span class="game-price-old">${formatCurrency(game.priceOld)}</span>
+                    <span class="game-price-new">${formatCurrency(game.priceNew)}</span>
                 </div>
-                <button class="btn-buy" onclick="addToCart(\${game.id})">
+                <button class="btn-buy" onclick="addToCart(${game.id})">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
@@ -147,7 +147,7 @@ const renderGames = (gamesToRender) => {
                     Añadir al Carrito
                 </button>
             </div>
-        \`;
+        `;
         
         gameGrid.appendChild(card);
     });
@@ -160,7 +160,7 @@ window.addToCart = (id) => {
     updateCartUI();
     
     // Mostrar Toast
-    toast.textContent = \`\${game.title} añadido al carrito\`;
+    toast.textContent = `${game.title} añadido al carrito`;
     toast.classList.add('show');
     setTimeout(() => {
         toast.classList.remove('show');
@@ -193,13 +193,13 @@ const updateCartUI = () => {
             total += item.priceNew;
             const itemElement = document.createElement('div');
             itemElement.className = 'cart-item';
-            itemElement.innerHTML = \`
+            itemElement.innerHTML = `
                 <div class="cart-item-info">
-                    <div class="cart-item-title">\${item.title}</div>
-                    <div class="cart-item-price">\${formatCurrency(item.priceNew)}</div>
+                    <div class="cart-item-title">${item.title}</div>
+                    <div class="cart-item-price">${formatCurrency(item.priceNew)}</div>
                 </div>
-                <div class="cart-item-remove" onclick="removeFromCart(\${index})">X</div>
-            \`;
+                <div class="cart-item-remove" onclick="removeFromCart(${index})">X</div>
+            `;
             cartItemsContainer.appendChild(itemElement);
         });
     }
@@ -234,14 +234,14 @@ checkoutBtn.onclick = () => {
     let total = 0;
 
     cart.forEach(item => {
-        message += \`- *\${item.title}* (\${formatCurrency(item.priceNew)})%0A\`;
+        message += `- *${item.title}* (${formatCurrency(item.priceNew)})%0A`;
         total += item.priceNew;
     });
 
-    message += \`%0A*Total a Pagar:* \${formatCurrency(total)}%0A%0A¿A qué cuenta transfiero?\`;
+    message += `%0A*Total a Pagar:* ${formatCurrency(total)}%0A%0A¿A qué cuenta transfiero?`;
 
     const phone = "573007301270";
-    const url = \`https://wa.me/\${phone}?text=\${message}\`;
+    const url = `https://wa.me/${phone}?text=${message}`;
     window.open(url, '_blank');
     
     // Vaciar carrito después de comprar (opcional)
