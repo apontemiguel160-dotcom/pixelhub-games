@@ -129,7 +129,7 @@ const renderGames = (gamesToRender) => {
                     <span class="game-price-old">\${formatCurrency(game.priceOld)}</span>
                     <span class="game-price-new">\${formatCurrency(game.priceNew)}</span>
                 </div>
-                <button class="btn-buy" onclick="addToCart()">
+                <button class="btn-buy" onclick="buyViaWhatsApp('\${game.title}', \${game.priceNew})">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
@@ -144,22 +144,13 @@ const renderGames = (gamesToRender) => {
     });
 };
 
-// Función para añadir al carrito
-window.addToCart = () => {
-    cartItems++;
-    cartCount.textContent = cartItems;
-    
-    // Animar el contador
-    cartCount.style.transform = 'scale(1.5)';
-    setTimeout(() => {
-        cartCount.style.transform = 'scale(1)';
-    }, 200);
-    
-    // Mostrar Toast
-    toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+// Función para redirigir a WhatsApp
+window.buyViaWhatsApp = (title, price) => {
+    const phone = "573007301270";
+    const formattedPrice = formatCurrency(price);
+    const message = `Hola, vengo de la tienda web. Me interesa adquirir: *${title}* por *${formattedPrice}*. ¿A qué cuenta transfiero?`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
 };
 
 // Filtros básicos
