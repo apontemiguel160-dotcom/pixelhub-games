@@ -58,8 +58,8 @@ const games = [
         id: 7,
         title: "Spotify Premium - 3 Meses",
         genre: "Entretenimiento",
-        priceOld: 50700,
-        priceNew: 25000,
+        priceOld: 40000,
+        priceNew: 20000, // Precio ajustado a petición
         discount: "-50%",
         image: "spotify_pin.png"
     },
@@ -92,6 +92,9 @@ const games = [
     }
 ];
 
+// Estado del Carrito
+let cart = [];
+
 // Formateador de moneda colombiana (COP)
 const formatCurrency = (value) => {
     return new Intl.NumberFormat('es-CO', {
@@ -101,13 +104,19 @@ const formatCurrency = (value) => {
     }).format(value);
 };
 
-// Referencias al DOM
+// Referencias al DOM principales
 const gameGrid = document.getElementById('game-grid');
 const cartCount = document.getElementById('cart-count');
 const toast = document.getElementById('toast');
 const filterBtns = document.querySelectorAll('.btn-filter');
 
-let cartItems = 0;
+// Referencias del Modal del Carrito
+const cartBtn = document.getElementById('cart-btn');
+const cartModal = document.getElementById('cart-modal');
+const closeCartBtn = document.getElementById('close-cart');
+const cartItemsContainer = document.getElementById('cart-items-container');
+const cartTotalPrice = document.getElementById('cart-total-price');
+const checkoutBtn = document.getElementById('checkout-btn');
 
 // Renderizar tarjetas de producto
 const renderGames = (gamesToRender) => {
@@ -129,13 +138,13 @@ const renderGames = (gamesToRender) => {
                     <span class="game-price-old">\${formatCurrency(game.priceOld)}</span>
                     <span class="game-price-new">\${formatCurrency(game.priceNew)}</span>
                 </div>
-                <button class="btn-buy" onclick="buyViaWhatsApp('\${game.title}', \${game.priceNew})">
+                <button class="btn-buy" onclick="addToCart(\${game.id})">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
-                    Comprar
+                    Añadir al Carrito
                 </button>
             </div>
         \`;
@@ -144,21 +153,107 @@ const renderGames = (gamesToRender) => {
     });
 };
 
-// Función para redirigir a WhatsApp
-window.buyViaWhatsApp = (title, price) => {
+// Función para añadir al carrito
+window.addToCart = (id) => {
+    const game = games.find(g => g.id === id);
+    cart.push(game);
+    updateCartUI();
+    
+    // Mostrar Toast
+    toast.textContent = \`\${game.title} añadido al carrito\`;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+};
+
+// Función para eliminar del carrito
+window.removeFromCart = (index) => {
+    cart.splice(index, 1);
+    updateCartUI();
+};
+
+// Actualizar UI del Carrito (Contador y Modal)
+const updateCartUI = () => {
+    // Actualizar contador
+    cartCount.textContent = cart.length;
+    cartCount.style.transform = 'scale(1.5)';
+    setTimeout(() => {
+        cartCount.style.transform = 'scale(1)';
+    }, 200);
+
+    // Renderizar items en el modal
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p style="text-align:center; color:#a0a0b8;">Tu carrito está vacío.</p>';
+    } else {
+        cart.forEach((item, index) => {
+            total += item.priceNew;
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            itemElement.innerHTML = \`
+                <div class="cart-item-info">
+                    <div class="cart-item-title">\${item.title}</div>
+                    <div class="cart-item-price">\${formatCurrency(item.priceNew)}</div>
+                </div>
+                <div class="cart-item-remove" onclick="removeFromCart(\${index})">X</div>
+            \`;
+            cartItemsContainer.appendChild(itemElement);
+        });
+    }
+
+    // Actualizar Total
+    cartTotalPrice.textContent = formatCurrency(total);
+};
+
+// Funciones del Modal
+cartBtn.onclick = () => {
+    cartModal.style.display = 'block';
+};
+
+closeCartBtn.onclick = () => {
+    cartModal.style.display = 'none';
+};
+
+window.onclick = (event) => {
+    if (event.target == cartModal) {
+        cartModal.style.display = 'none';
+    }
+};
+
+// Checkout por WhatsApp
+checkoutBtn.onclick = () => {
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    let message = "Hola, vengo de la tienda web. Quiero comprar los siguientes productos:%0A%0A";
+    let total = 0;
+
+    cart.forEach(item => {
+        message += \`- *\${item.title}* (\${formatCurrency(item.priceNew)})%0A\`;
+        total += item.priceNew;
+    });
+
+    message += \`%0A*Total a Pagar:* \${formatCurrency(total)}%0A%0A¿A qué cuenta transfiero?\`;
+
     const phone = "573007301270";
-    const formattedPrice = formatCurrency(price);
-    const message = `Hola, vengo de la tienda web. Me interesa adquirir: *${title}* por *${formattedPrice}*. ¿A qué cuenta transfiero?`;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const url = \`https://wa.me/\${phone}?text=\${message}\`;
     window.open(url, '_blank');
+    
+    // Vaciar carrito después de comprar (opcional)
+    cart = [];
+    updateCartUI();
+    cartModal.style.display = 'none';
 };
 
 // Filtros básicos
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // Quitar clase active de todos
         filterBtns.forEach(b => b.classList.remove('active'));
-        // Añadir al clickeado
         btn.classList.add('active');
         
         const filter = btn.textContent.trim();
@@ -175,4 +270,5 @@ filterBtns.forEach(btn => {
 // Inicializar la tienda
 document.addEventListener('DOMContentLoaded', () => {
     renderGames(games);
+    updateCartUI();
 });

@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <!-- Archivo de estilos -->
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
     <!-- Notificación Toast -->
@@ -100,7 +100,22 @@
         </svg>
     </a>
 
+    <!-- Modal del Carrito -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-modal" id="close-cart">&times;</span>
+            <h2>Tu Carrito de Compras</h2>
+            <div id="cart-items-container" class="cart-items-container">
+                <!-- Items inyectados por JS -->
+            </div>
+            <div class="cart-footer">
+                <h3>Total: <span id="cart-total-price">$0</span></h3>
+                <button id="checkout-btn" class="btn btn-primary glow-effect" style="width: 100%; margin-top: 15px;">Comprar por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Archivo de scripts -->
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>
