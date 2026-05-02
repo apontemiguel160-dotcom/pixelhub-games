@@ -2,93 +2,12 @@
 const games = [
     {
         id: 1,
-        title: "1000 Pavos - Fortnite",
-        genre: "Monedas Virtuales",
-        priceOld: 39900,
-        priceNew: 31900,
-        discount: "-20%",
-        image: "https://images.unsplash.com/photo-1589241062272-c0a000072dfa?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: 2,
         title: "Perfil Netflix 4K - 1 Mes",
         genre: "Entretenimiento",
         priceOld: 25000,
-        priceNew: 18000,
-        discount: "-28%",
+        priceNew: 21000,
+        discount: "-16%",
         image: "assets/img/netflix_pin.png"
-    },
-    {
-        id: 3,
-        title: "800 Robux - Roblox",
-        genre: "Monedas Virtuales",
-        priceOld: 25000,
-        priceNew: 19500,
-        discount: "-22%",
-        image: "https://images.unsplash.com/photo-1629856578056-b0eec82da171?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: 4,
-        title: "Disney+ Premium - 1 Mes",
-        genre: "Entretenimiento",
-        priceOld: 23900,
-        priceNew: 15000,
-        discount: "-37%",
-        image: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: 5,
-        title: "1100 CP - Call of Duty",
-        genre: "Monedas Virtuales",
-        priceOld: 45000,
-        priceNew: 38000,
-        discount: "-15%",
-        image: "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=2019&auto=format&fit=crop"
-    },
-    {
-        id: 6,
-        title: "520 Diamantes - Free Fire",
-        genre: "Monedas Virtuales",
-        priceOld: 20000,
-        priceNew: 15500,
-        discount: "-22%",
-        image: "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=2067&auto=format&fit=crop"
-    },
-    {
-        id: 7,
-        title: "Spotify Premium - 3 Meses",
-        genre: "Entretenimiento",
-        priceOld: 40000,
-        priceNew: 20000,
-        discount: "-50%",
-        image: "assets/img/spotify_pin.png"
-    },
-    {
-        id: 8,
-        title: "Max (HBO) Estándar - 1 Mes",
-        genre: "Entretenimiento",
-        priceOld: 19900,
-        priceNew: 13900,
-        discount: "-30%",
-        image: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: 9,
-        title: "Crunchyroll Mega Fan - 1 Mes",
-        genre: "Entretenimiento",
-        priceOld: 14900,
-        priceNew: 9900,
-        discount: "-33%",
-        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1974&auto=format&fit=crop"
-    },
-    {
-        id: 10,
-        title: "Xbox Game Pass Ultimate - 1 Mes",
-        genre: "Entretenimiento",
-        priceOld: 33900,
-        priceNew: 24900,
-        discount: "-26%",
-        image: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?q=80&w=1932&auto=format&fit=crop"
     }
 ];
 
