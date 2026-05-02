@@ -16,7 +16,7 @@ const games = [
         priceOld: 25000,
         priceNew: 18000,
         discount: "-28%",
-        image: "netflix_pin.png"
+        image: "assets/img/netflix_pin.png"
     },
     {
         id: 3,
@@ -61,7 +61,7 @@ const games = [
         priceOld: 40000,
         priceNew: 20000,
         discount: "-50%",
-        image: "spotify_pin.png"
+        image: "assets/img/spotify_pin.png"
     },
     {
         id: 8,
