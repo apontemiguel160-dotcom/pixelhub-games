@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelHub Games - Monedas Virtuales y Entretenimiento</title>
+    <meta name="description" content="Encuentra las mejores ofertas en monedas virtuales y planes de streaming. Ofertas épicas en PixelHub Games.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Archivo de estilos -->
+    <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast">Añadido al carrito con éxito</div>
+
+    <!-- Navegación -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">🎮</span>
+                PixelHub<span class="highlight">Games</span>
+            </a>
+            <nav class="nav">
+                <a href="#inicio" class="nav-link active">Inicio</a>
+                <a href="#ofertas" class="nav-link">Ofertas</a>
+                <a href="#categorias" class="nav-link">Categorías</a>
+            </nav>
+            <div class="cart-btn" id="cart-btn">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Principal (Hero) -->
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">Sube de nivel, <br> <span class="highlight-neon">baja los precios.</span></h1>
+            <p class="hero-subtitle">Tu destino principal para Monedas Virtuales (Robux, Pavos) y Suscripciones Premium (Netflix, Spotify) a precios increíbles.</p>
+            <a href="#ofertas" class="btn btn-primary glow-effect">Ver Ofertas Épicas</a>
+        </div>
+    </section>
+
+    <!-- Sección de Juegos -->
+    <section id="ofertas" class="games-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ofertas <span class="highlight">Destacadas</span></h2>
+                <div class="filter-buttons">
+                    <button class="btn-filter active">Todos</button>
+                    <button class="btn-filter">Monedas Virtuales</button>
+                    <button class="btn-filter">Entretenimiento</button>
+                </div>
+            </div>
+            
+            <!-- Contenedor donde JS inyectará los juegos -->
+            <div class="game-grid" id="game-grid">
+                <!-- Las tarjetas de juegos se renderizarán aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <a href="#" class="logo">PixelHub<span class="highlight">Games</span></a>
+                <p class="footer-desc">Tu tienda de confianza en Colombia para recargas de monedas virtuales y cuentas de entretenimiento premium. ¡Únete al parche!</p>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Soporte</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PixelHub Games. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Archivo de scripts -->
+    <script src="script.js?v=3"></script>
+</body>
+</html>
