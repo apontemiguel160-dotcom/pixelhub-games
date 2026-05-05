@@ -23,6 +23,17 @@ const games = [
             { name: "Premium 1M",    price: 40400 }
         ],
         image: "assets/img/xbox_gamepass.png"
+    },
+    {
+        id: 3,
+        title: "Free Fire - Diamantes",
+        genre: "Monedas Virtuales",
+        plans: [
+            { name: "100 Diamantes", price: 4700  },
+            { name: "310 Diamantes", price: 12500 },
+            { name: "520 Diamantes", price: 20100 }
+        ],
+        image: "assets/img/freefire_diamonds.png"
     }
 ];
 
