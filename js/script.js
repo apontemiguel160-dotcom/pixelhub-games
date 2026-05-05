@@ -5,15 +5,27 @@ const games = [
         title: "Perfil Netflix 4K - 1 Mes",
         genre: "Entretenimiento",
         plans: [
-            { name: "1 Pantalla",   price: 20500 },
-            { name: "2 Pantallas",  price: 30500 },
-            { name: "3 Pantallas",  price: 35500 },
-            { name: "4K Premium",   price: 40500 },
-            { name: "Plan Familiar",price: 50500 }
+            { name: "1 Pantalla",    price: 20500 },
+            { name: "2 Pantallas",   price: 30500 },
+            { name: "3 Pantallas",   price: 35500 },
+            { name: "4K Premium",    price: 40500 },
+            { name: "Plan Familiar", price: 50500 }
         ],
         image: "assets/img/netflix_pin.png"
+    },
+    {
+        id: 2,
+        title: "Xbox Game Pass",
+        genre: "Entretenimiento",
+        plans: [
+            { name: "Essential 3M",  price: 88400 },
+            { name: "Ultimate 1M",   price: 50400 },
+            { name: "Premium 1M",    price: 40400 }
+        ],
+        image: "https://store-images.s-microsoft.com/image/apps.35529.13510798887677013.e94e60d5-0e9d-4aaa-b29a-ee55eb2f7fc4.1bca2c9e-c4a7-4a1b-b9d8-4a72a4a00e0d"
     }
 ];
+
 
 // Estado del Carrito
 let cart = [];
