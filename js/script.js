@@ -4,9 +4,7 @@ const games = [
         id: 1,
         title: "Perfil Netflix 4K - 1 Mes",
         genre: "Entretenimiento",
-        priceOld: 25000,
-        priceNew: 21000,
-        discount: "-16%",
+        priceNew: 20500,
         image: "assets/img/netflix_pin.png"
     }
 ];
@@ -47,14 +45,12 @@ const renderGames = (gamesToRender) => {
         
         card.innerHTML = `
             <div class="game-image-container">
-                <span class="game-discount">${game.discount}</span>
                 <img src="${game.image}" alt="${game.title}" class="game-image">
             </div>
             <div class="game-info">
                 <h3 class="game-title">${game.title}</h3>
                 <p class="game-genre">${game.genre}</p>
                 <div class="game-price-row">
-                    <span class="game-price-old">${formatCurrency(game.priceOld)}</span>
                     <span class="game-price-new">${formatCurrency(game.priceNew)}</span>
                 </div>
                 <button class="btn-buy" onclick="addToCart(${game.id})">
