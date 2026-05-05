@@ -4,7 +4,13 @@ const games = [
         id: 1,
         title: "Perfil Netflix 4K - 1 Mes",
         genre: "Entretenimiento",
-        priceNew: 20500,
+        plans: [
+            { name: "1 Pantalla",   price: 20500 },
+            { name: "2 Pantallas",  price: 30500 },
+            { name: "3 Pantallas",  price: 35500 },
+            { name: "4K Premium",   price: 40500 },
+            { name: "Plan Familiar",price: 50500 }
+        ],
         image: "assets/img/netflix_pin.png"
     }
 ];
@@ -42,7 +48,24 @@ const renderGames = (gamesToRender) => {
     gamesToRender.forEach(game => {
         const card = document.createElement('div');
         card.className = 'game-card';
-        
+
+        const hasPlans = game.plans && game.plans.length > 0;
+        const defaultPrice = hasPlans ? game.plans[0].price : game.priceNew;
+
+        const planOptions = hasPlans
+            ? game.plans.map((p, i) =>
+                `<option value="${i}">${p.name} — ${formatCurrency(p.price)}</option>`
+              ).join('')
+            : '';
+
+        const planSelector = hasPlans ? `
+            <div class="plan-selector-wrap">
+                <label class="plan-label">Plan</label>
+                <select class="plan-select" id="plan-select-${game.id}" onchange="updatePrice(${game.id})">
+                    ${planOptions}
+                </select>
+            </div>` : '';
+
         card.innerHTML = `
             <div class="game-image-container">
                 <img src="${game.image}" alt="${game.title}" class="game-image">
@@ -51,7 +74,8 @@ const renderGames = (gamesToRender) => {
                 <h3 class="game-title">${game.title}</h3>
                 <p class="game-genre">${game.genre}</p>
                 <div class="game-price-row">
-                    <span class="game-price-new">${formatCurrency(game.priceNew)}</span>
+                    <span class="game-price-new" id="price-display-${game.id}">${formatCurrency(defaultPrice)}</span>
+                    ${planSelector}
                 </div>
                 <button class="btn-buy" onclick="addToCart(${game.id})">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -63,19 +87,44 @@ const renderGames = (gamesToRender) => {
                 </button>
             </div>
         `;
-        
+
         gameGrid.appendChild(card);
     });
+};
+
+// Actualizar precio al cambiar el plan
+window.updatePrice = (id) => {
+    const game = games.find(g => g.id === id);
+    const selectEl = document.getElementById(`plan-select-${id}`);
+    const idx = parseInt(selectEl.value);
+    const priceDisplay = document.getElementById(`price-display-${id}`);
+    priceDisplay.textContent = formatCurrency(game.plans[idx].price);
+
+    // Animación de pulso en el precio
+    priceDisplay.classList.add('price-pulse');
+    setTimeout(() => priceDisplay.classList.remove('price-pulse'), 400);
 };
 
 // Función para añadir al carrito
 window.addToCart = (id) => {
     const game = games.find(g => g.id === id);
-    cart.push(game);
+    const selectEl = document.getElementById(`plan-select-${id}`);
+    const hasPlans = game.plans && game.plans.length > 0;
+    const selectedPlan = hasPlans
+        ? game.plans[parseInt(selectEl.value)]
+        : { name: '', price: game.priceNew };
+
+    const cartItem = {
+        id: game.id,
+        title: hasPlans ? `${game.title} · ${selectedPlan.name}` : game.title,
+        priceNew: selectedPlan.price
+    };
+
+    cart.push(cartItem);
     updateCartUI();
-    
+
     // Mostrar Toast
-    toast.textContent = `${game.title} añadido al carrito`;
+    toast.textContent = `${cartItem.title} añadido al carrito`;
     toast.classList.add('show');
     setTimeout(() => {
         toast.classList.remove('show');
